@@ -43,8 +43,16 @@ public class MainActivity extends AppCompatActivity {
         btnReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                resetTheGame();
-                btnReset.setVisibility(View.GONE);
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Do something after 5s = 5000ms
+                        resetTheGame();
+                        btnReset.setVisibility(View.GONE);
+                    }
+                }, 2000);
+
             }
         });
 
@@ -80,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
             for (int[] winnerColumns : winnerRowColumns) {
                 if (playerChoices[winnerColumns[0]] == playerChoices[winnerColumns[1]] && playerChoices[winnerColumns[1]] == playerChoices[winnerColumns[2]] && playerChoices[winnerColumns[0]] != null) {
                     //Toast.makeText(this, "We have a winner", Toast.LENGTH_LONG).show();
-                    gameOver=true;
+                    gameOver = true;
                     btnReset.setVisibility(View.VISIBLE);
 
 
@@ -97,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }, 2000);
 
+                        return ;
 
                     } else {
                         Toast.makeText(this, "It is decided LM10 is the\ngreatest of all times.", Toast.LENGTH_LONG).show();
@@ -111,11 +120,12 @@ public class MainActivity extends AppCompatActivity {
                                 winnerImageView.setAlpha(1f);
                             }
                         }, 2000);
+                        return ;
 
                     }
                 }
-            }
 
+            }
         }
         if (turns==9)
         {

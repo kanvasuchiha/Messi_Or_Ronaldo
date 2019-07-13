@@ -6,7 +6,7 @@ android {
     defaultConfig {
         applicationId "com.smartherd.tut_2_lion_or_tiger_game"
         minSdkVersion 24
-        targetSdkVersion 28
+        targetSdkVersion 26
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"

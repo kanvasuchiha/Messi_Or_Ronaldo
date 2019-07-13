@@ -9,6 +9,7 @@ import android.support.v7.widget.GridLayout;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import nl.dionsegijn.konfetti.KonfettiView;
@@ -23,19 +24,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     Player currentPlayer = Player.ONE;
-
     Player[] playerChoices = new Player[9];
-
     int[][] winnerRowColumns = {{0, 1, 2}, {3, 4, 5}, {6, 7, 8}, {0, 3, 6}, {1, 4, 7}, {2, 5, 8}, {0, 4, 8}, {2, 4, 6}};
-
     private boolean gameOver = false;
-
     private Button btnReset;
-
     private GridLayout gridLayout;
     private ImageView winnerImageView;
     private int turns = 0;
     private KonfettiView konfettiView;
+    private TextView textView;
 
 
 
@@ -48,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         gridLayout= findViewById(R.id.gridLayout);
         winnerImageView = findViewById(R.id.winnerImage);
         konfettiView = findViewById(R.id.konfettiView);
+        textView = findViewById(R.id.textView);
 
         btnReset.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
                 if (playerChoices[winnerColumns[0]] == playerChoices[winnerColumns[1]] && playerChoices[winnerColumns[1]] == playerChoices[winnerColumns[2]] && playerChoices[winnerColumns[0]] != null) {
                     //Toast.makeText(this, "We have a winner", Toast.LENGTH_LONG).show();
                     gameOver = true;
-                    btnReset.setVisibility(View.VISIBLE);
 
 
                     if (currentPlayer == Player.ONE) {
@@ -112,6 +109,8 @@ public class MainActivity extends AppCompatActivity {
                                 // Do something after 5s = 5000ms
                                 gridLayout.setAlpha(0f);
                                 winnerImageView.setAlpha(1f);
+                                btnReset.setVisibility(View.VISIBLE);
+                                textView.setVisibility(View.GONE);
                                 konfettiView.build()
                                         .addColors(Color.YELLOW, Color.GREEN, Color.MAGENTA)
                                         .setDirection(0.0, 359.0)
@@ -140,6 +139,8 @@ public class MainActivity extends AppCompatActivity {
 
                                 gridLayout.setAlpha(0f);
                                 winnerImageView.setAlpha(1f);
+                                btnReset.setVisibility(View.VISIBLE);
+                                textView.setVisibility(View.GONE);
                                 konfettiView.build()
                                         .addColors(Color.YELLOW, Color.GREEN, Color.MAGENTA)
                                         .setDirection(0.0, 359.0)
@@ -190,6 +191,7 @@ public class MainActivity extends AppCompatActivity {
             imageView.setAlpha(0f);
         }
         currentPlayer = Player.ONE;
+        textView.setVisibility(View.VISIBLE);
         gameOver=false;
         gridLayout.setAlpha(1f);
         winnerImageView.setAlpha(0f);

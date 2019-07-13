@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
     private GridLayout gridLayout;
     private ImageView winnerImageView;
+    private int turns = 0;
 
 
     @Override
@@ -54,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         ImageView tappedImageView = (ImageView) imageView;
         int tiTag = Integer.parseInt(tappedImageView.getTag().toString());
 
+        turns++;
 
         if (playerChoices[tiTag] == null && gameOver == false) {
 
@@ -69,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
                 currentPlayer = Player.ONE;
                 playerChoices[tiTag] = Player.TWO;
             }
+
 
             tappedImageView.animate().translationXBy(2000).alpha(1f).rotation(3600).setDuration(1000);
             Toast.makeText(this, tappedImageView.getTag().toString(), Toast.LENGTH_SHORT).show();
@@ -113,6 +116,22 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
 
+        }
+        if (turns==9)
+        {
+            turns=0;
+            Toast.makeText(this, "It turns out that neither\nof you can decide\nLet's try again", Toast.LENGTH_LONG).show();
+            winnerImageView.setImageResource(R.drawable.truce);
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    // Do something after 5s = 5000ms
+                    gridLayout.setAlpha(0f);
+                    winnerImageView.setAlpha(1f);
+                }
+            }, 2000);
+            btnReset.setVisibility(View.VISIBLE);
         }
     }
 

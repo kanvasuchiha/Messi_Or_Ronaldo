@@ -30,7 +30,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="Lion or Tiger?"
+        android:text="Messi VS Ronaldo"
         android:textColor="#0A28D1"
         android:textSize="30sp"
         android:textStyle="bold"

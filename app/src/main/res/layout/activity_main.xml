@@ -7,6 +7,22 @@
     android:background="@drawable/gradient1"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:id="@+id/winnerImage"
+        android:layout_width="309dp"
+        android:layout_height="351dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:alpha="0"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView"
+        app:srcCompat="@drawable/messi_winner" />
+
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"

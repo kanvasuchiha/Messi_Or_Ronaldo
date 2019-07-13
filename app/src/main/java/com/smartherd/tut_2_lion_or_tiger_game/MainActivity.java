@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
                     gridLayout.setAlpha(0f);
                     winnerImageView.setAlpha(1f);
                 }
-            }, 2000);
+            }, 5000);
             btnReset.setVisibility(View.VISIBLE);
         }
     }
@@ -138,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
     // RESET game function
 
     private void resetTheGame(){
+        turns=0;
         for (int index =0; index<gridLayout.getChildCount(); index++){
 
             ImageView imageView = (ImageView) gridLayout.getChildAt(index);

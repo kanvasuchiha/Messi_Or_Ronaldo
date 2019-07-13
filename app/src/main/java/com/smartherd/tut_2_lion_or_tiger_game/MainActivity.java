@@ -1,6 +1,7 @@
 package com.smartherd.tut_2_lion_or_tiger_game;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,6 +10,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import nl.dionsegijn.konfetti.KonfettiView;
+import nl.dionsegijn.konfetti.models.Shape;
+import nl.dionsegijn.konfetti.models.Size;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     private GridLayout gridLayout;
     private ImageView winnerImageView;
     private int turns = 0;
+    private KonfettiView konfettiView;
+
 
 
     @Override
@@ -39,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
         btnReset = findViewById(R.id.btnReset);
         gridLayout= findViewById(R.id.gridLayout);
         winnerImageView = findViewById(R.id.winnerImage);
+        konfettiView = findViewById(R.id.konfettiView);
 
         btnReset.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
     public void imageViewIsTapped(View imageView) {
         ImageView tappedImageView = (ImageView) imageView;
         int tiTag = Integer.parseInt(tappedImageView.getTag().toString());
+
 
         turns++;
 
@@ -102,6 +112,17 @@ public class MainActivity extends AppCompatActivity {
                                 // Do something after 5s = 5000ms
                                 gridLayout.setAlpha(0f);
                                 winnerImageView.setAlpha(1f);
+                                konfettiView.build()
+                                        .addColors(Color.YELLOW, Color.GREEN, Color.MAGENTA)
+                                        .setDirection(0.0, 359.0)
+                                        .setSpeed(1f, 5f)
+                                        .setFadeOutEnabled(true)
+                                        .setTimeToLive(2000L)
+                                        .addShapes(Shape.RECT, Shape.CIRCLE)
+                                        .addSizes(new Size(12, 5))
+                                        .setPosition(-50f, konfettiView.getWidth() + 50f, -50f, -50f)
+                                        .streamFor(300, 5000L);
+
                             }
                         }, 2000);
 
@@ -116,8 +137,19 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 // Do something after 5s = 5000ms
+
                                 gridLayout.setAlpha(0f);
                                 winnerImageView.setAlpha(1f);
+                                konfettiView.build()
+                                        .addColors(Color.YELLOW, Color.GREEN, Color.MAGENTA)
+                                        .setDirection(0.0, 359.0)
+                                        .setSpeed(1f, 5f)
+                                        .setFadeOutEnabled(true)
+                                        .setTimeToLive(2000L)
+                                        .addShapes(Shape.RECT, Shape.CIRCLE)
+                                        .addSizes(new Size(12, 5))
+                                        .setPosition(-50f, konfettiView.getWidth() + 50f, -50f, -50f)
+                                        .streamFor(300, 5000L);
                             }
                         }, 2000);
                         return ;

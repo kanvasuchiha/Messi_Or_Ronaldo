@@ -2,11 +2,13 @@ package com.smartherd.tut_2_lion_or_tiger_game;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayout;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     private int turns = 0;
     private KonfettiView konfettiView;
     private TextView textView;
+    private ImageView progress;
 
 
 
@@ -102,6 +105,14 @@ public class MainActivity extends AppCompatActivity {
                     if (currentPlayer == Player.ONE) {
                         Toast.makeText(this, "It is decided CR7 is the\ngreatest of all times.", Toast.LENGTH_LONG).show();
                         winnerImageView.setImageResource(R.drawable.ronaldo2);
+                        progress =findViewById(R.id.backgr);
+                        if (progress != null) {
+                            progress.setVisibility(View.VISIBLE);
+                            AnimationDrawable frameAnimation = (AnimationDrawable) progress.getDrawable();
+                            frameAnimation.setEnterFadeDuration(100);
+                            frameAnimation.setExitFadeDuration(100);
+                            frameAnimation.start();
+                        }
                         final Handler handler = new Handler();
                         handler.postDelayed(new Runnable() {
                             @Override
@@ -131,6 +142,15 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(this, "It is decided LM10 is the\ngreatest of all times.", Toast.LENGTH_LONG).show();
 
                         winnerImageView.setImageResource(R.drawable.messi2);
+                        progress =findViewById(R.id.backgr);
+                        if (progress != null) {
+                            progress.setVisibility(View.VISIBLE);
+                            AnimationDrawable frameAnimation = (AnimationDrawable) progress.getDrawable();
+                            frameAnimation.setEnterFadeDuration(100);
+                            frameAnimation.setExitFadeDuration(100);
+                            frameAnimation.start();
+
+                        }
                         final Handler handler = new Handler();
                         handler.postDelayed(new Runnable() {
                             @Override
@@ -172,9 +192,10 @@ public class MainActivity extends AppCompatActivity {
                     // Do something after 5s = 5000ms
                     gridLayout.setAlpha(0f);
                     winnerImageView.setAlpha(1f);
+                    btnReset.setVisibility(View.VISIBLE);
                 }
-            }, 5000);
-            btnReset.setVisibility(View.VISIBLE);
+            }, 2000);
+
         }
     }
 
@@ -195,5 +216,16 @@ public class MainActivity extends AppCompatActivity {
         gameOver=false;
         gridLayout.setAlpha(1f);
         winnerImageView.setAlpha(0f);
-    }
+        progress =findViewById(R.id.backgr);
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                AnimationDrawable frameAnimation = (AnimationDrawable) progress.getDrawable();
+                frameAnimation.stop();
+                progress.setVisibility(View.GONE);
+            } }, 2000);
+
+        }
 }
